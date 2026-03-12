@@ -18,13 +18,13 @@ RedBlackTree::~RedBlackTree(){
 
 }
 
-void RedBlackTree::searchBySongTitle(const string& songTitle){
+bool RedBlackTree::searchBySongTitle(const string& songTitle){
 
     // TODO: implement
 
 }
 
-void RedBlackTree::searchByArtistName(const string& artistName){
+bool RedBlackTree::searchByArtistName(const string& artistName){
     
     // TODO: implement
 
