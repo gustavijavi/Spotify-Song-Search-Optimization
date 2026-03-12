@@ -21,10 +21,10 @@ private:
 
     Node* root;
 
-    // private functions here
+    // TODO: implement private functions here
 
 
-//public functions here
+// public functions here
 public:
 
     RedBlackTree();
@@ -33,6 +33,7 @@ public:
 
     bool insert(const string& songTitle, const string& artistName, int releaseYear, int popularity);
 
+    // TODO: add correct return type for both searches once we discuss on how we'll go about it
     void searchBySongTitle(const string& songTitle);
 
     void searchByArtistName(const string& artistName);
