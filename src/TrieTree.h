@@ -5,21 +5,20 @@
 
 using namespace std;
 
-
-struct Node {
-    array<Node*, 26> children; // for all the 26 letters in alphabet
-    bool isSongTitle;
-    string artistName;
-    int releaseYear;
-    int popularity;
-
-    Node(int releaseYear, int popularity);
-};
-
-
 class TrieTree {
 
 private:
+
+    struct Node {
+        array<Node*, 26> children; // for all the 26 letters in alphabet
+        bool isSongTitle;
+        string artistName;
+        int releaseYear;
+        int popularity;
+
+        Node(int releaseYear, int popularity);
+    };
+
 
     Node* root;
 
@@ -32,7 +31,7 @@ public:
 
     ~TrieTree();
 
-    void insert(const string& songOrArtist);
+    void insert(const string& songTitle, string artistName, int releaseYear, int popularity);
 
     // I'm thinking for the search we return a boolean for whether
     // it was successful and then have references to variables from
