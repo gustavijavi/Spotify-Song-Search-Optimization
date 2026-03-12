@@ -1,23 +1,23 @@
 #pragma once
 #include <iostream>
 #include <string>
-#include <vector>
 
 using namespace std;
 
+
+struct Node {
+    string songTitle, artistName;
+    int releaseYear, popularity;
+    bool isRed;
+    Node *parent, *left, *right;
+
+    Node(const string& songTitle, const string& artistName, int releaseYear, int popularity);
+};
+
 class RedBlackTree {
 
-// private for node struct and functions
+// private for creating root variable and functions
 private:
-    
-    struct Node {
-        string songTitle, artistName;
-        int releaseYear, popularity;
-        bool isRed;
-        Node *parent, *left, *right;
-
-        Node(const string& songTitle, const string& artistName, int releaseYear, int popularity);
-    };
 
     Node* root;
 
@@ -33,9 +33,14 @@ public:
 
     bool insert(const string& songTitle, const string& artistName, int releaseYear, int popularity);
 
-    // TODO: add correct return type for both searches once we discuss on how we'll go about it
-    void searchBySongTitle(const string& songTitle);
+    // I'm thinking for the search we return a boolean for whether
+    // it was successful and then have references to variables from
+    // main.cpp to store the artist name, release year, and popularity
+    // in.
+    // ex. bool searchBySongTitle(const string& songTitle, string& artistName, int& releaseYear, int& popularity){}
+    bool searchBySongTitle(const string& songTitle);
 
-    void searchByArtistName(const string& artistName);
+    // same thing here just switching around song title and artist name
+    bool searchByArtistName(const string& artistName);
 
 };
