@@ -40,6 +40,7 @@ public:
     bool searchBySongTitle(const string& songTitle);
 
     // same thing here just switching around song title and artist name
+    // Edit (3/13/2026): Pass in reference to a vector of strings for the songTitles maybe?
     bool searchByArtistName(const string& artistName);
 
 };
