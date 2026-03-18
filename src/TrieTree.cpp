@@ -1,6 +1,6 @@
 #include "TrieTree.h"
 
-TrieTree::Node::Node(int releaseYear, int popularity){
+TrieNode::TrieNode(){
 
     // TODO: implement
 
@@ -24,13 +24,7 @@ void TrieTree::insert(const string& songTitle, string artistName, int releaseYea
 
 }
 
-bool TrieTree::searchBySongTitle(const string& songTitle){
-
-    // TODO: implement
-
-}
-
-bool TrieTree::searchByArtistName(const string& artistName){
+bool TrieTree::search(const string& songTitle){
 
     // TODO: implement
 
