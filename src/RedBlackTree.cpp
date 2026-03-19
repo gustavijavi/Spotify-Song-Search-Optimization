@@ -1,10 +1,5 @@
 #include "RedBlackTree.h"
 
-RedBlackTree::Node::Node(const string& songTitle, const string& artistName, int releaseYear, int popularity){
-    
-    // TODO: implement
-
-}
 
 RedBlackTree::RedBlackTree(){
 
@@ -18,14 +13,14 @@ RedBlackTree::~RedBlackTree(){
 
 }
 
-bool RedBlackTree::searchBySongTitle(const string& songTitle){
+void RedBlackTree::insert(){
 
     // TODO: implement
-
+    
 }
 
-bool RedBlackTree::searchByArtistName(const string& artistName){
-    
+bool RedBlackTree::search(){
+
     // TODO: implement
 
 }
