@@ -18,22 +18,36 @@ int main(){
 
     // insert songs from csv into trees here
 
-    std::cout << std::endl << "Welcome to the Spotify Song Search!" << std::endl << std::endl << "------------------------------------------" << std::endl << std::endl;
+    // welcome message
+    std::cout << std::endl << "Welcome to the Spotify Song Search!" << std::endl;
 
-    
-    // while(true) {
+    // whole program will reiterate until user inputs for an exit
+    while(true) {
 
-    std::cout << "1. Search for song\t2. Insert your own song" << std::endl << "3. Exit" << std::endl << std::endl;
-    std::cout << "What would you like to do? (Select from above): ";
+        // printing options for user and prompting for input
+        std::cout << std::endl << "---------------------------------------------------" << std::endl << "1. Search for song\t2. Insert your own song" << std::endl << "3. Exit" << std::endl << "---------------------------------------------------" << std::endl << std::endl;
+        std::cout << "What would you like to do? (Select from above): ";
 
-    int input = 0;
+        string input = "";
 
-    std::cin >> input;
-    std::cin.ignore();
+        // grabbing input from user
+        std::getline(std::cin, input);
+
+        std::cout << std::endl;
+
+        // if else statements for each option, chosen based off of what user picks
+        if(input == "1"){
+            std::cout << "This is where search will happen" << std::endl;
+        } else if(input == "2"){
+            std::cout << "This is where user insertion will happen" << std::endl;
+        } else if(input == "3"){
+            break;
+        } else {
+            std::cout << "Invalid response, try again" << std::endl;
+        }
 
 
-
-    // }
+    }
 
     return 0;
 }
