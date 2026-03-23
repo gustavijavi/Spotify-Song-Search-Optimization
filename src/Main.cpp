@@ -54,15 +54,27 @@ int main(){
         trieTree.insert(songTitle, artistName, releaseYear, popularity);
     }
 
+    auto longPauseTime = std::chrono::milliseconds(1500);
+    auto shortPauseTime = std::chrono::milliseconds(750);
+
     // welcome message
     std::cout << std::endl << "Welcome to the Spotify Song Search!" << std::endl;
+    std::this_thread::sleep_for(longPauseTime);
 
     // whole program will reiterate until user inputs for an exit
     while(true) {
 
-        // printing options for user and prompting for input
-        std::cout << std::endl << "---------------------------------------------------" << std::endl << "1. Search for song\t2. Insert your own song" << std::endl << "3. Exit" << std::endl << "---------------------------------------------------" << std::endl << std::endl;
+        // printing options for user and prompting for input with pause times to make it easier to read
+        std::cout << std::endl << "---------------------------------------------------" << std::endl; 
+        std::this_thread::sleep_for(shortPauseTime);
+        std::cout << "1. Search for song\t2. Insert your own song" << std::endl;
+        std::this_thread::sleep_for(shortPauseTime);
+        std::cout << "3. Exit" << std::endl;
+        std::this_thread::sleep_for(shortPauseTime);
+        std::cout << "---------------------------------------------------" << std::endl << std::endl;
+        std::this_thread::sleep_for(shortPauseTime);
         std::cout << "What would you like to do? (Select from above): ";
+        std::this_thread::sleep_for(shortPauseTime);
 
         std::string input = "";
 
@@ -98,14 +110,21 @@ int main(){
                 finish = std::chrono::steady_clock::now();
                 auto elapsedTimeTrie = std::chrono::duration_cast<std::chrono::microseconds>(finish - start);
 
+                
                 // If either of the trees return a nullptr, it will print to the user that the song was not found.
                 if(resultRB != nullptr && resultTrie != nullptr){
+                    std::this_thread::sleep_for(shortPauseTime);
+
                     // print elapsed time for each tree in the terminal
                     std::cout << "Red Black Tree: Found in " << elapsedTimeRB.count() << " microseconds" << std::endl;
+                    std::this_thread::sleep_for(shortPauseTime);
+
                     std::cout << "Trie Tree: Found in " << elapsedTimeTrie.count() << " microseconds" << std::endl;
+                    std::this_thread::sleep_for(shortPauseTime);
 
                     // give metadata from the song that was searched for
                     std::cout << "Artist(s): " << resultTrie->_artistName << " | Release Year: " << resultTrie->_releaseYear << " | Popularity Score: " << resultTrie->_popularity << std::endl << std::endl;
+                    std::this_thread::sleep_for(shortPauseTime);
                     std::cout << "Press Enter to continue...";
                     std::cin.get();
                     std::cout << std::endl;
@@ -115,7 +134,35 @@ int main(){
             }
 
         } else if(input == "2"){
-            std::cout << "This is where user insertion will happen" << std::endl;
+            
+            std::string songTitleInsert = "";
+            std::string artistNameInsert = "";
+            std::string releaseYearInsert = "";
+            std::string popularityInsert = "";
+
+            // Prompting the user for the song title to insert
+            std::cout << "Enter song title: ";
+            std::getline(std::cin, songTitleInsert);
+
+            // Prompting the user for the artist names(s) to insert
+            std::cout << "Enter artist name(s) for song: ";
+            std::getline(std::cin, artistNameInsert);
+
+            // Prompting the user for the release year to insert
+            std::cout << "Enter release year of song: ";
+            std::getline(std::cin, releaseYearInsert);
+
+            // Prompting the user for the popularity of the song to insert
+            std::cout << "Enter song popularity (0-100): ";
+            std::getline(std::cin, popularityInsert);
+            std::cout << std::endl;
+
+            redBlackTree.insert(songTitleInsert, artistNameInsert, releaseYearInsert, popularityInsert);
+            trieTree.insert(songTitleInsert, artistNameInsert, releaseYearInsert, popularityInsert);
+
+            std::cout << "Song successfully inserted into both the Red Black and Trie Tree!" << std::endl;
+
+
         } else if(input == "3"){
             break;
         } else {
