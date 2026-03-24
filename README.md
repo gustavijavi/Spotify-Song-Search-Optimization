@@ -14,7 +14,7 @@ Once you run our program, you'll be brought through an intuitive design that ask
 <h2> Table of Contents </h2>
 
 - [Getting Started](#getting-started)
-- [Creating and Running Main Executable](#creating-and-running-main-executable)
+- [Creating and Running the Main Executable](#creating-and-running-main-executable)
 - [Final Remarks](#final-remarks)
 
 <br>
@@ -40,7 +40,7 @@ git clone https://github.com/gustavijavi/Spotify-Song-Search-Optimization.git
 
 <br>
 
-## Creating and Running Main Executable
+## Creating and Running the Main Executable
 
 **This project requires g++ to compile.**
 
