@@ -2,7 +2,7 @@
 
 ### UF COP3530 Project 2 created by Javier Coll-Roman, Matthew Kilroy, and Jayesh Agarwal
 
-A C++ program that delves into the efficiencies of the search functions for both Red-Black and Trie trees. Through insertion of 100k+ datapoints into both tree structures, we see the time it takes to search for any song inputted by the user as well as give the capability for the user to add their own songs as well.
+A C++ program that delves into the efficiencies of the search functions for both Red-Black and Trie trees. Through insertion of 100k+ song datapoints into both tree structures, we see the time it takes to search for any song inputted by the user as well as give the capability for the user to add their own songs as well.
 
 Once you run our program, you'll be brought through an intuitive design that asks you to choose from menu options to either **search**, **insert**, or **exit**: 
 - **Search:** If you choose to **search**, input any song you like, it may just be in the dataset! If it isn't, try searching for a song that you know is more popular from artists such as Michael Jackson, Katy Perry, Frank Sinatra, etc. After a successful search, useful metadata for the song will be outputted including the artist(s), release year, and popularity of the song on a scale from 0 to 100.
@@ -73,5 +73,5 @@ You now have our program running on your system. Feel free to look through our c
 
 Credits:
 - Javier Coll-Roman (Main.cpp, README.md) - [GitHub Profile](https://github.com/gustavijavi)
-- Matthew Kilroy (TrieTree.h, TrieTree.cpp) - [GitHub Profile](https://github.com/mbkilroy83)
+- Matthew Kilroy (TrieTree.h, TrieTree.cpp, CSV Datasets) - [GitHub Profile](https://github.com/mbkilroy83)
 - Jayesh Agarwal (RedBlackTree.h, RedBlackTree.cpp) - [GitHub Profile](https://github.com/jayesh100100)
