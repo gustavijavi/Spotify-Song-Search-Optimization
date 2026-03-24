@@ -126,6 +126,9 @@ int main(){
                     std::cout << "Trie Tree: Found in " << elapsedTimeTrie.count() << " microseconds" << std::endl;
                     std::this_thread::sleep_for(shortPauseTime);
 
+                    std::cout << (elapsedTimeRB.count() > elapsedTimeTrie.count() ? "Trie Tree " : "Red-Black Tree ") << "was faster with this search!" << std::endl;
+                    std::this_thread::sleep_for(shortPauseTime);
+
                     // give metadata from the song that was searched for
                     std::cout << "Artist(s): " << resultTrie->_artistName << " | Release Year: " << resultTrie->_releaseYear << " | Popularity Score: " << resultTrie->_popularity << std::endl << std::endl;
                     std::this_thread::sleep_for(shortPauseTime);
