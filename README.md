@@ -1,8 +1,8 @@
-<h1> COP3530 - Project 2 </h1> 
+<h1> Spotify Song Search Optimization </h1> 
 
-<ins> **Spotify Song Search Optimization using a Red-Black and a Trie Tree** </ins>
+### UF COP3530 Project 2 created by Javier Coll-Roman, Matthew Kilroy, and Jayesh Agarwal
 
-This project, created by Javier Coll-Roman, Matthew Kilroy, and Jayesh Agarwal, delves into the efficiencies of the search functions for both Red-Black and Trie trees. Through insertion of 100k+ datapoints into both tree structures, we see the time it takes to search for any song inputted by the user as well as give the capability for the user to add their own song as well.
+A C++ program that delves into the efficiencies of the search functions for both Red-Black and Trie trees. Through insertion of 100k+ datapoints into both tree structures, we see the time it takes to search for any song inputted by the user as well as give the capability for the user to add their own songs as well.
 
 Once you run our program, you'll be brought through an intuitive design that asks you to choose from menu options to either **search**, **insert**, or **exit**: 
 - **Search:** If you choose to **search**, input any song you like, it may just be in the dataset! If it isn't, try searching for a song that you know is more popular from artists such as Michael Jackson, Katy Perry, Frank Sinatra, etc. After a successful search, useful metadata for the song will be outputted including the artist(s), release year, and popularity of the song on a scale from 0 to 100.
@@ -17,9 +17,11 @@ Once you run our program, you'll be brought through an intuitive design that ask
 - [Creating and Running Main Executable](#creating-and-running-main-executable)
 - [Final Remarks](#final-remarks)
 
+<br>
+
 ## Getting Started
 
-To download this project to try for yourself, you must have git installed to do so. Download git [here](https://git-scm.com).
+To clone this project to try for yourself, you must have git installed to do so. Download git [here](https://git-scm.com).
 
 In the terminal, within your preferred compiler for C++ programs, set the working directory to wherever you'd like the program in your computer.
 
@@ -46,14 +48,15 @@ git clone https://github.com/gustavijavi/Spotify-Song-Search-Optimization.git
 - **Linux:** Run `sudo apt install g++`
 - **Windows:** Install MinGW
 
-You will not need to install or download any datasets as it is already provided within the resources folder.
+**You will not need to install or download any datasets as it is already provided within the resources folder.**
 
-Make sure that your working directory is set to the repository you just cloned. Do not move the working directory to the source folder or the resources folder.
+Make sure that your working directory is set to the repository you just cloned. **DO NOT** move the working directory to the source folder or the resources folder.
 
-Within your terminal, now enter (C++17 is required for this project)
+Within your terminal, now enter
 ```
 g++ -std=c++17 -o main src/Main.cpp src/RedBlackTree.cpp src/TrieTree.cpp
 ```
+(C++17 is required for this project)
 
 To run the program, enter
 ```
