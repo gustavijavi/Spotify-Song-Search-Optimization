@@ -71,7 +71,7 @@ To run the program, enter
 
 You now have our program running on your system. Feel free to look through our code and see just how it utilizes each tree and checks the time taken to search within each tree as well.
 
-Credits:
+### Credits:
 - Javier Coll-Roman (Main.cpp, README.md) - [GitHub Profile](https://github.com/gustavijavi)
 - Matthew Kilroy (TrieTree.h, TrieTree.cpp, CSV Datasets) - [GitHub Profile](https://github.com/mbkilroy83)
 - Jayesh Agarwal (RedBlackTree.h, RedBlackTree.cpp) - [GitHub Profile](https://github.com/jayesh100100)
