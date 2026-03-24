@@ -126,7 +126,9 @@ int main(){
                     std::cout << "Trie Tree: Found in " << elapsedTimeTrie.count() << " microseconds" << std::endl;
                     std::this_thread::sleep_for(shortPauseTime);
 
-                    std::cout << (elapsedTimeRB.count() > elapsedTimeTrie.count() ? "Trie Tree " : "Red-Black Tree ") << "was faster with this search!" << std::endl;
+                    std::cout << (elapsedTimeRB.count() == elapsedTimeTrie.count() ? "Both trees tied in this search!" :
+                    elapsedTimeRB.count() > elapsedTimeTrie.count() ? "Trie Tree was faster with this search!" :
+                    "Red-Black Tree was faster with this search!") << std::endl;
                     std::this_thread::sleep_for(shortPauseTime);
 
                     // give metadata from the song that was searched for
