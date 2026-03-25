@@ -54,13 +54,13 @@ Make sure that your working directory is set to the repository you just cloned. 
 
 Within your terminal, now enter
 ```
-g++ -std=c++17 -o main src/Main.cpp src/RedBlackTree.cpp src/TrieTree.cpp
+g++ -std=c++17 -o SpotifySongSearch src/Main.cpp src/RedBlackTree.cpp src/TrieTree.cpp
 ```
 (C++17 is required for this project)
 
 To run the program, enter
 ```
-./main
+./SpotifySongSearch
 ```
 
 <br>
