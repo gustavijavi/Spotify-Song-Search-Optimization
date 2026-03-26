@@ -104,7 +104,7 @@ int main(){
 
                 // Finding the time it takes to search for the song within the Red Black Tree
                 auto start = std::chrono::steady_clock::now();
-                Metadata* resultRB = redBlackTree.search(input);
+                Data* resultRB = redBlackTree.search(input);
                 auto finish = std::chrono::steady_clock::now();
                 auto elapsedTimeRB = std::chrono::duration_cast<std::chrono::microseconds>(finish - start);
                 
