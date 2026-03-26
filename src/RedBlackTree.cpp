@@ -1,26 +1,59 @@
 #include "RedBlackTree.h"
+#include <string>
 
+using namespace std;
 
-RedBlackTree::RedBlackTree(){
+//Definition for RedBlackTree Metadata constructor
+Data::Data(const string& songTitle, const string& artistName, const string& releaseYear, const string& popularity)
+{
+    _songTitle = songTitle;
+    _artistName = artistName;
+    _releaseYear = releaseYear;
+    _popularity = popularity;
+}
 
-    // TODO: implement
+RBTreeNode::RBTreeNode()
+{
+    isBlack = true;
+    _data = nullptr;
+}
+
+RedBlackTree::RedBlackTree()
+{
+    _root = new RBTreeNode();
 
 }
 
-RedBlackTree::~RedBlackTree(){
+RedBlackTree::~RedBlackTree()
+{
+    deleteNode(_root);
+}
+
+void RedBlackTree::insert(const string& songTitle, const string& artistName, const string& releaseYear, const string& popularity) const
+{
     
-    // TODO: implement
-
 }
 
-void RedBlackTree::insert(){
+//Song search function for RedBlackTree
+Data* RedBlackTree::search(const string& songTitle) const
+{
+    RBTreeNode* current = _root;
+    bool searching = true;
+    while (searching) {
+        string currentSongTitle = current->_data->_songTitle;
 
-    // TODO: implement
-    
-}
+        if (current->_data == nullptr) {
+            return nullptr;
+        }
 
-bool RedBlackTree::search(){
-
-    // TODO: implement
-
+        if (currentSongTitle.compare(songTitle) < 0) {
+            current = current->rightChild;
+        }
+        else if (currentSongTitle.compare(songTitle) > 0) {
+            current = current->leftChild;
+        }
+        else {
+            return current->_data;
+        }
+    }
 }
