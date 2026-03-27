@@ -37,6 +37,7 @@ void RedBlackTree::deleteNode(const RBTreeNode* node) {
         return;
     }
 
+    deleteNode(node->parent);
     deleteNode(node->leftChild);
     deleteNode(node->rightChild);
 
