@@ -66,14 +66,17 @@ void RedBlackTree::insert(const string& songTitle, const string& artistName, con
                 current->leftChild->parent = current;
                 inserting = false;
             }
-            else if (current->rightChild->_data == nullptr) {
+            else if (current->_data->_songTitle.compare(songTitle) < 0 && current->rightChild->_data == nullptr) {
                 current->rightChild->_data = new Data(songTitle, artistName, releaseYear, popularity);
                 current->rightChild->isBlack = false;
                 current->rightChild->parent = current;
                 inserting = false;
             }
+            else if (current->_data->_songTitle.compare(songTitle) > 0) {
+                current = current->leftChild;
+            }
             else {
-                fixing = false;
+                current = current->rightChild;
             }
 
             while (fixing) {
