@@ -15,6 +15,7 @@ struct Data
 
 //struct definition for RBTreeNode
 struct RBTreeNode {
+    RBTreeNode* parent;
     RBTreeNode* rightChild;
     RBTreeNode* leftChild;
     bool isBlack; //Identifies whether a node is black or red
@@ -25,11 +26,10 @@ struct RBTreeNode {
 //class definition for RedBlackTree
 class RedBlackTree {
     RBTreeNode* _root;
-    void deleteNode(RBTreeNode* node);
+    void deleteNode(const RBTreeNode* node);
 public:
     RedBlackTree();
     ~RedBlackTree();
     void insert(const string& songTitle, const string& artistName, const string& releaseYear, const string& popularity) const;
     Data* search(const string& songTitle) const;
-
 };
