@@ -93,43 +93,101 @@ void RedBlackTree::insert(const string& songTitle, const string& artistName, con
                     bool childPosition = false; //false means leftChild relative to parent node, true means rightChild relative to parent node
                     bool parentPosition = false;
                     bool grandparentPosition = false;
+                    RBTreeNode* _parent = current->parent;
+                    RBTreeNode* _grandparent = current->parent->parent;
+                    RBTreeNode* _greatgrandparent = current->parent->parent->parent;
 
-                    if (current->_data->_songTitle.compare(current->parent->_data->_songTitle) > 0) {
+                    if (current->_data->_songTitle.compare(_parent->_data->_songTitle) > 0) {
                         childPosition = true;
                     }
 
-                    if (current->parent->_data->_songTitle.compare(current->parent->parent->_data->_songTitle) > 0) {
+                    if (_parent->_data->_songTitle.compare(_grandparent->_data->_songTitle) > 0) {
                         parentPosition = true;
                     }
 
-                    if (current->parent->parent->_data->_songTitle.compare(current->parent->parent->parent->_data->_songTitle) > 0) {
+                    if (_grandparent->_data->_songTitle.compare(_greatgrandparent->_data->_songTitle) > 0) {
                         grandparentPosition = true;
                     }
 
                     if (childPosition && parentPosition) {
-                        current->parent->leftChild->parent = current->parent->parent;
-                        current->parent->parent->rightChild = current->parent->leftChild->parent;
-                        current->parent->leftChild = current->parent->parent;
-                        current->parent->parent = current->parent->parent->parent;
+                        _parent->leftChild->parent = _grandparent;
+                        _grandparent->rightChild = _parent->leftChild;
+                        _parent->leftChild = _grandparent;
+                        _grandparent->parent = _parent;
+                        _parent->isBlack = true;
+                        _grandparent->isBlack = false;
+
+                        if (grandparentPosition) {
+                            _greatgrandparent->rightChild = _parent;
+                            _parent->parent = _greatgrandparent;
+                        }
+                        else {
+                            _greatgrandparent->leftChild = _parent;
+                            _parent->parent = _greatgrandparent;
+                        }
                     }
                     else if (!childPosition && !parentPosition) {
-                        current->parent->rightChild->parent = current->parent->parent;
-                        current->parent->parent->leftChild = current->parent->rightChild->parent;
-                        current->parent->rightChild = current->parent->parent;
-                        current->parent->parent = current->parent->parent->parent;
+                        _parent->rightChild->parent = _grandparent;
+                        _grandparent->leftChild = _parent->rightChild;
+                        _parent->rightChild = _grandparent;
+                        _grandparent->parent = _parent;
+                        _parent->isBlack = true;
+                        _grandparent->isBlack = false;
+
+                        if (grandparentPosition) {
+                            _greatgrandparent->rightChild = _parent;
+                            _parent->parent = _greatgrandparent;
+                        }
+                        else {
+                            _greatgrandparent->leftChild = _parent;
+                            _parent->parent = _greatgrandparent;
+                        }
                     }
                     else if (parentPosition) {
-                       //
-                    }
-                    else {
-                        //
-                    }
+                        _parent->parent = _parent->leftChild;
+                        _parent->leftChild = _grandparent;
+                        _grandparent->parent = _parent;
+                        _grandparent->rightChild = nullptr;
+                        _grandparent->rightChild->isBlack = true;
+                        current->parent = _greatgrandparent;
 
-                    if (grandparentPosition) {
-                        current->parent->parent->parent->rightChild = current->parent->parent;
+                        if (grandparentPosition) {
+                            _greatgrandparent->rightChild = current;
+                        }
+                        else {
+                            _greatgrandparent->leftChild = current;
+                        }
+
+                        _grandparent->parent = current;
+                        _parent->leftChild = nullptr;
+                        _parent->leftChild->isBlack = true;
+                        current->leftChild = _grandparent;
+                        current->isBlack = true;
+                        _grandparent->isBlack = false;
+                        current = _parent;
                     }
                     else {
-                        current->parent->parent->parent->leftChild = current->parent->parent;
+                        _parent->parent = _parent->rightChild;
+                        _parent->rightChild = _grandparent;
+                        _grandparent->parent = _parent;
+                        _grandparent->leftChild = nullptr;
+                        _grandparent->leftChild->isBlack = true;
+                        current->parent = _greatgrandparent;
+
+                        if (grandparentPosition) {
+                            _greatgrandparent->rightChild = current;
+                        }
+                        else {
+                            _greatgrandparent->leftChild = current;
+                        }
+
+                        _grandparent->parent = current;
+                        _parent->rightChild = nullptr;
+                        _parent->rightChild->isBlack = true;
+                        current->rightChild = _grandparent;
+                        current->isBlack = true;
+                        _grandparent->isBlack = false;
+                        current = _parent;
                     }
                 }
                 current = current->parent->parent;
