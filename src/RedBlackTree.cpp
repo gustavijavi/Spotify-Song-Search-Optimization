@@ -76,15 +76,19 @@ void RedBlackTree::insert(const string& songTitle, const string& artistName, con
             }
 
             while (fixing) {
-                if (current->parent->isBlack) {
+                RBTreeNode* _parent = current->parent;
+                RBTreeNode* _grandparent = current->parent->parent;
+                RBTreeNode* _greatgrandparent = current->parent->parent->parent;
+
+                if (_parent->isBlack) {
                     fixing = false;
                 }
-                else if (!current->parent->parent->leftChild->isBlack && !current->parent->parent->rightChild->isBlack) {
-                    current->parent->parent->isBlack = false;
-                    current->parent->parent->leftChild->isBlack = true;
-                    current->parent->parent->rightChild->isBlack = true;
+                else if (!_grandparent->leftChild->isBlack && !_grandparent->rightChild->isBlack) {
+                    _grandparent->isBlack = false;
+                    _grandparent->leftChild->isBlack = true;
+                    _grandparent->rightChild->isBlack = true;
 
-                    if (current->parent->parent == _root) {
+                    if (_grandparent == _root) {
                         _root->isBlack = true;
                         fixing = false;
                     }
@@ -93,9 +97,6 @@ void RedBlackTree::insert(const string& songTitle, const string& artistName, con
                     bool childPosition = false; //false means leftChild relative to parent node, true means rightChild relative to parent node
                     bool parentPosition = false;
                     bool grandparentPosition = false;
-                    RBTreeNode* _parent = current->parent;
-                    RBTreeNode* _grandparent = current->parent->parent;
-                    RBTreeNode* _greatgrandparent = current->parent->parent->parent;
 
                     if (current->_data->_songTitle.compare(_parent->_data->_songTitle) > 0) {
                         childPosition = true;
