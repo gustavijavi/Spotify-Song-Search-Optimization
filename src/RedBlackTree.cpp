@@ -18,7 +18,7 @@ RBTreeNode::RBTreeNode()
     parent = nullptr;
     leftChild = nullptr;
     rightChild = nullptr;
-    isBlack = true;
+    isBlack = false;
     _data = nullptr;
 }
 
@@ -47,10 +47,63 @@ void RedBlackTree::deleteNode(RBTreeNode* node) {
     delete node;
 }
 
+void leftRotation(RBTreeNode* node) {
+
+}
+
+void rightRotation(RBTreeNode* node) {
+
+}
+
+void fixRedBlackTree(RBTreeNode* node) {
+    if (node->parent == nullptr) {
+        node->isBlack = true;
+        return;
+    }
+
+    if (node->parent->parent == nullptr) {
+        return;
+    }
+}
+
 //Song insert function for RedBlackTree
-void RedBlackTree::insert(const string& songTitle, const string& artistName, const string& releaseYear, const string& popularity)
+void RedBlackTree::insert(const string& songTitle, const string& artistName, const string& releaseYear, const string& popularity) {
+    RBTreeNode* insertedNode = new RBTreeNode();
+    insertedNode->_data = new Data(songTitle, artistName, releaseYear, popularity);
+
+    RBTreeNode* current = _root;
+    RBTreeNode* currentParent = nullptr;
+
+    while (current != nullptr) {
+        currentParent = current;
+
+        if (current->_data->_songTitle.compare(songTitle) < 0) {
+            current = current->rightChild;
+        }
+        else if (current->_data->_songTitle.compare(songTitle) > 0) {
+            current = current->leftChild;
+        }
+    }
+
+    insertedNode->parent = currentParent;
+
+    if (currentParent == nullptr) {
+        _root = insertedNode;
+    }
+    else if (insertedNode->_data->_songTitle.compare(currentParent->_data->_songTitle) > 0) {
+        currentParent->rightChild = insertedNode;
+    }
+    else {
+        currentParent->leftChild = insertedNode;
+    }
+
+    fixRedBlackTree(insertedNode);
+}
+
+//Song insert function for RedBlackTree
+/*void RedBlackTree::insert(const string& songTitle, const string& artistName, const string& releaseYear, const string& popularity)
 {
-    if (_root->_data == nullptr) {
+    if (_root == nullptr) {
         _root->_data = new Data(songTitle, artistName, releaseYear, popularity);
     }
 
@@ -209,7 +262,7 @@ void RedBlackTree::insert(const string& songTitle, const string& artistName, con
             }
         }
     }
-}
+}*/
 
 //Song search function for RedBlackTree
 Data* RedBlackTree::search(const string& songTitle) const

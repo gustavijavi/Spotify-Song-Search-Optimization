@@ -27,6 +27,9 @@ struct RBTreeNode {
 class RedBlackTree {
     RBTreeNode* _root;
     void deleteNode(RBTreeNode* node);
+    void leftRotation(RBTreeNode* node);
+    void rightRotation(RBTreeNode* node);
+    void fixRedBlackTree(RBTreeNode* node);
 public:
     RedBlackTree();
     ~RedBlackTree();
