@@ -215,19 +215,18 @@ void RedBlackTree::insert(const string& songTitle, const string& artistName, con
 Data* RedBlackTree::search(const string& songTitle) const
 {
     RBTreeNode* current = _root;
-    while (true) {
-        if (current->_data == nullptr) {
-            return nullptr; //nothing is returned if database is empty
-        }
 
+    while (current != nullptr) {
         if (current->_data->_songTitle.compare(songTitle) < 0) {
             current = current->rightChild; //Goes to right child to search for song title
         }
         else if (current->_data->_songTitle.compare(songTitle) > 0) {
             current = current->leftChild; //Goes to left child to search for song title
         }
-        else {
+        else if (current->_data->_songTitle == songTitle) {
             return current->_data; //Song title and other data returned
         }
     }
+
+    return nullptr;
 }
