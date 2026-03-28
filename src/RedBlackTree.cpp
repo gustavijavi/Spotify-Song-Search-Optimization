@@ -47,15 +47,60 @@ void RedBlackTree::deleteNode(RBTreeNode* node) {
     delete node;
 }
 
-void leftRotation(RBTreeNode* node) {
-    //continue
+//Function for doing left rotations
+void RedBlackTree::leftRotation(RBTreeNode* node) {
+    RBTreeNode* nodeChild = node->rightChild;
+
+    node->rightChild = nodeChild->leftChild;
+
+    if (nodeChild->leftChild != nullptr) {
+        nodeChild->leftChild->parent = node;
+    }
+
+    nodeChild->parent = node->parent;
+
+    if (node->parent == nullptr) {
+        _root = nodeChild;
+    }
+    else if (node == node->parent->leftChild) {
+        node->parent->leftChild = nodeChild;
+    }
+    else {
+        node->parent->rightChild = nodeChild;
+    }
+
+    nodeChild->leftChild = node;
+    node->parent = nodeChild;
 }
 
-void rightRotation(RBTreeNode* node) {
-    //continue
+//Functions for doing right rotations
+void RedBlackTree::rightRotation(RBTreeNode* node) {
+    RBTreeNode* nodeChild = node->leftChild;
+
+    node->leftChild = nodeChild->rightChild;
+
+    if (nodeChild->rightChild != nullptr) {
+        nodeChild->rightChild->parent = node;
+    }
+
+    nodeChild->parent = node->parent;
+
+    if (node->parent == nullptr) {
+        _root = nodeChild;
+    }
+    else if (node == node->parent->rightChild) {
+        node->parent->rightChild = nodeChild;
+    }
+    else {
+        node->parent->leftChild = nodeChild;
+    }
+
+    nodeChild->rightChild = node;
+    node->parent = nodeChild;
 }
 
-void fixRedBlackTree(RBTreeNode* node) {
+//Rebalancing and color flipping function for Red Black Tree
+void RedBlackTree::fixRedBlackTree(RBTreeNode* node) {
     if (node->parent == nullptr) {
         node->isBlack = true;
         return;
@@ -65,31 +110,43 @@ void fixRedBlackTree(RBTreeNode* node) {
         return;
     }
 
-    RBTreeNode* _parent = node->parent;
-
-    while (_parent != nullptr && !_parent->isBlack) {
+    while (node->parent != nullptr && !node->parent->isBlack) {
         RBTreeNode* _uncle = nullptr;
-        if (_parent == _parent->parent->leftChild) {
-            _uncle = _parent->parent->rightChild;
+        if (node->parent == node->parent->parent->leftChild) {
+            _uncle = node->parent->parent->rightChild;
         }
         else {
-            _uncle = _parent->parent->leftChild;
+            _uncle = node->parent->parent->leftChild;
         }
 
         if (_uncle != nullptr && !_uncle->isBlack) {
             _uncle->isBlack = true;
-            _parent->isBlack = true;
-            _parent->parent->isBlack = false;
-            node = _parent->parent;
-            _parent = node->parent;
+            node->parent->isBlack = true;
+            node->parent->parent->isBlack = false;
+            node = node->parent->parent;
         }
-        else if (node == _parent->leftChild) {
-            //continue
+        else if (_uncle == node->parent->parent->rightChild) {
+            if (node == node->parent->rightChild) {
+                node = node->parent;
+                leftRotation(node); //For left-right case
+            }
+
+            node->parent->isBlack = true;
+            node->parent->parent->isBlack = false;
+            rightRotation(node->parent->parent); //For left-left case
         }
         else {
-           //continue
+            if (node == node->parent->leftChild) {
+                node = node->parent;
+                rightRotation(node); //For right-left case
+            }
+
+            node->parent->isBlack = true;
+            node->parent->parent->isBlack = false;
+            leftRotation(node->parent->parent); //For right-right case
         }
     }
+    _root->isBlack = true;
 }
 
 //Song insert function for RedBlackTree
@@ -109,6 +166,11 @@ void RedBlackTree::insert(const string& songTitle, const string& artistName, con
         }
         else if (current->_data->_songTitle.compare(songTitle) > 0) {
             current = current->leftChild;
+        }
+        else {
+            delete insertedNode->_data; //Just in case if node with song data already exists
+            delete insertedNode;
+            return;
         }
     }
 
