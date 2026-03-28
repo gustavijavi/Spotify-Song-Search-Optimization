@@ -18,7 +18,7 @@ RBTreeNode::RBTreeNode()
     parent = nullptr;
     leftChild = nullptr;
     rightChild = nullptr;
-    isBlack = false;
+    isBlack = true;
     _data = nullptr;
 }
 
@@ -48,11 +48,11 @@ void RedBlackTree::deleteNode(RBTreeNode* node) {
 }
 
 void leftRotation(RBTreeNode* node) {
-
+    //continue
 }
 
 void rightRotation(RBTreeNode* node) {
-
+    //continue
 }
 
 void fixRedBlackTree(RBTreeNode* node) {
@@ -64,12 +64,39 @@ void fixRedBlackTree(RBTreeNode* node) {
     if (node->parent->parent == nullptr) {
         return;
     }
+
+    RBTreeNode* _parent = node->parent;
+
+    while (_parent != nullptr && !_parent->isBlack) {
+        RBTreeNode* _uncle = nullptr;
+        if (_parent == _parent->parent->leftChild) {
+            _uncle = _parent->parent->rightChild;
+        }
+        else {
+            _uncle = _parent->parent->leftChild;
+        }
+
+        if (_uncle != nullptr && !_uncle->isBlack) {
+            _uncle->isBlack = true;
+            _parent->isBlack = true;
+            _parent->parent->isBlack = false;
+            node = _parent->parent;
+            _parent = node->parent;
+        }
+        else if (node == _parent->leftChild) {
+            //continue
+        }
+        else {
+           //continue
+        }
+    }
 }
 
 //Song insert function for RedBlackTree
 void RedBlackTree::insert(const string& songTitle, const string& artistName, const string& releaseYear, const string& popularity) {
     RBTreeNode* insertedNode = new RBTreeNode();
     insertedNode->_data = new Data(songTitle, artistName, releaseYear, popularity);
+    insertedNode->isBlack = false;
 
     RBTreeNode* current = _root;
     RBTreeNode* currentParent = nullptr;
@@ -99,170 +126,6 @@ void RedBlackTree::insert(const string& songTitle, const string& artistName, con
 
     fixRedBlackTree(insertedNode);
 }
-
-//Song insert function for RedBlackTree
-/*void RedBlackTree::insert(const string& songTitle, const string& artistName, const string& releaseYear, const string& popularity)
-{
-    if (_root == nullptr) {
-        _root->_data = new Data(songTitle, artistName, releaseYear, popularity);
-    }
-
-    RBTreeNode* current = _root;
-
-    bool inserting = true;
-
-    while (inserting) {
-        if (current->leftChild->_data == nullptr || current->rightChild->_data == nullptr) {
-            bool fixing = true;
-
-            if (current->_data->_songTitle.compare(songTitle) > 0 && current->leftChild->_data == nullptr) {
-                current->leftChild->_data = new Data(songTitle, artistName, releaseYear, popularity);
-                current->leftChild->isBlack = false;
-                current->leftChild->parent = current;
-                inserting = false;
-            }
-            else if (current->_data->_songTitle.compare(songTitle) < 0 && current->rightChild->_data == nullptr) {
-                current->rightChild->_data = new Data(songTitle, artistName, releaseYear, popularity);
-                current->rightChild->isBlack = false;
-                current->rightChild->parent = current;
-                inserting = false;
-            }
-            else if (current->_data->_songTitle.compare(songTitle) > 0) {
-                current = current->leftChild;
-            }
-            else {
-                current = current->rightChild;
-            }
-
-            while (fixing) {
-                RBTreeNode* _parent = current->parent;
-                RBTreeNode* _grandparent = current->parent->parent;
-                RBTreeNode* _greatgrandparent = current->parent->parent->parent;
-
-                if (_parent->isBlack) {
-                    fixing = false;
-                }
-                else if (!_grandparent->leftChild->isBlack && !_grandparent->rightChild->isBlack) {
-                    _grandparent->isBlack = false;
-                    _grandparent->leftChild->isBlack = true;
-                    _grandparent->rightChild->isBlack = true;
-
-                    if (_grandparent == _root) {
-                        _root->isBlack = true;
-                        fixing = false;
-                    }
-                }
-                else {
-                    bool childPosition = false; //false means leftChild relative to parent node, true means rightChild relative to parent node
-                    bool parentPosition = false;
-                    bool grandparentPosition = false;
-
-                    if (current->_data->_songTitle.compare(_parent->_data->_songTitle) > 0) {
-                        childPosition = true;
-                    }
-
-                    if (_parent->_data->_songTitle.compare(_grandparent->_data->_songTitle) > 0) {
-                        parentPosition = true;
-                    }
-
-                    if (_grandparent->_data->_songTitle.compare(_greatgrandparent->_data->_songTitle) > 0) {
-                        grandparentPosition = true;
-                    }
-
-                    if (childPosition && parentPosition) {
-                        _parent->leftChild->parent = _grandparent;
-                        _grandparent->rightChild = _parent->leftChild;
-                        _parent->leftChild = _grandparent;
-                        _grandparent->parent = _parent;
-                        _parent->isBlack = true;
-                        _grandparent->isBlack = false;
-
-                        if (grandparentPosition) {
-                            _greatgrandparent->rightChild = _parent;
-                            _parent->parent = _greatgrandparent;
-                        }
-                        else {
-                            _greatgrandparent->leftChild = _parent;
-                            _parent->parent = _greatgrandparent;
-                        }
-                    }
-                    else if (!childPosition && !parentPosition) {
-                        _parent->rightChild->parent = _grandparent;
-                        _grandparent->leftChild = _parent->rightChild;
-                        _parent->rightChild = _grandparent;
-                        _grandparent->parent = _parent;
-                        _parent->isBlack = true;
-                        _grandparent->isBlack = false;
-
-                        if (grandparentPosition) {
-                            _greatgrandparent->rightChild = _parent;
-                            _parent->parent = _greatgrandparent;
-                        }
-                        else {
-                            _greatgrandparent->leftChild = _parent;
-                            _parent->parent = _greatgrandparent;
-                        }
-                    }
-                    else if (parentPosition) {
-                        _parent->parent = _parent->leftChild;
-                        _parent->leftChild = _grandparent;
-                        _grandparent->parent = _parent;
-                        _grandparent->rightChild = nullptr;
-                        _grandparent->rightChild->isBlack = true;
-                        current->parent = _greatgrandparent;
-
-                        if (grandparentPosition) {
-                            _greatgrandparent->rightChild = current;
-                        }
-                        else {
-                            _greatgrandparent->leftChild = current;
-                        }
-
-                        _grandparent->parent = current;
-                        _parent->leftChild = nullptr;
-                        _parent->leftChild->isBlack = true;
-                        current->leftChild = _grandparent;
-                        current->isBlack = true;
-                        _grandparent->isBlack = false;
-                        current = _parent;
-                    }
-                    else {
-                        _parent->parent = _parent->rightChild;
-                        _parent->rightChild = _grandparent;
-                        _grandparent->parent = _parent;
-                        _grandparent->leftChild = nullptr;
-                        _grandparent->leftChild->isBlack = true;
-                        current->parent = _greatgrandparent;
-
-                        if (grandparentPosition) {
-                            _greatgrandparent->rightChild = current;
-                        }
-                        else {
-                            _greatgrandparent->leftChild = current;
-                        }
-
-                        _grandparent->parent = current;
-                        _parent->rightChild = nullptr;
-                        _parent->rightChild->isBlack = true;
-                        current->rightChild = _grandparent;
-                        current->isBlack = true;
-                        _grandparent->isBlack = false;
-                        current = _parent;
-                    }
-                }
-                current = current->parent->parent;
-            }
-        }
-        else {
-            if (current->_data->_songTitle.compare(songTitle) > 0) {
-                current = current->leftChild;
-            }
-            else {
-                current = current->rightChild;
-            }
-        }
-    }
-}*/
 
 //Song search function for RedBlackTree
 Data* RedBlackTree::search(const string& songTitle) const
