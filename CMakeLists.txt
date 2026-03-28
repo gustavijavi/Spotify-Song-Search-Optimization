@@ -28,3 +28,5 @@ add_executable(tests
 target_include_directories(tests PRIVATE src)
 
 target_link_libraries(tests PRIVATE Catch2::Catch2WithMain)
+
+file(COPY resources DESTINATION ${CMAKE_BINARY_DIR})
