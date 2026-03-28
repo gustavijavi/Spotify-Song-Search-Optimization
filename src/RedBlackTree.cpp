@@ -119,13 +119,13 @@ void RedBlackTree::fixRedBlackTree(RBTreeNode* node) {
             _uncle = node->parent->parent->leftChild;
         }
 
-        if (_uncle != nullptr && !_uncle->isBlack) {
+        if (_uncle != nullptr && !_uncle->isBlack) { //Case where uncle is red.
             _uncle->isBlack = true;
             node->parent->isBlack = true;
             node->parent->parent->isBlack = false;
             node = node->parent->parent;
         }
-        else if (_uncle == node->parent->parent->rightChild) {
+        else if (_uncle == node->parent->parent->rightChild) { //Parent is left child of grandparent node
             if (node == node->parent->rightChild) {
                 node = node->parent;
                 leftRotation(node); //For left-right case
@@ -146,7 +146,7 @@ void RedBlackTree::fixRedBlackTree(RBTreeNode* node) {
             leftRotation(node->parent->parent); //For right-right case
         }
     }
-    _root->isBlack = true;
+    _root->isBlack = true; //root node has to be always black
 }
 
 //Song insert function for RedBlackTree
