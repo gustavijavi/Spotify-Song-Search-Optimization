@@ -15,6 +15,9 @@ Data::Data(const string& songTitle, const string& artistName, const string& rele
 //Definition for RBTreeNode constructor
 RBTreeNode::RBTreeNode()
 {
+    parent = nullptr;
+    leftChild = nullptr;
+    rightChild = nullptr;
     isBlack = true;
     _data = nullptr;
 }
@@ -22,7 +25,7 @@ RBTreeNode::RBTreeNode()
 //Definition for RedBlackTree constructor
 RedBlackTree::RedBlackTree()
 {
-    _root = new RBTreeNode();
+    _root = nullptr;
 }
 
 //Definition for RedBlackTree deconstructor
@@ -32,12 +35,11 @@ RedBlackTree::~RedBlackTree()
 }
 
 //Song delete function for RedBlackTree deconstructor
-void RedBlackTree::deleteNode(const RBTreeNode* node) {
+void RedBlackTree::deleteNode(RBTreeNode* node) {
     if (node == nullptr) {
         return;
     }
 
-    deleteNode(node->parent);
     deleteNode(node->leftChild);
     deleteNode(node->rightChild);
 
@@ -46,7 +48,7 @@ void RedBlackTree::deleteNode(const RBTreeNode* node) {
 }
 
 //Song insert function for RedBlackTree
-void RedBlackTree::insert(const string& songTitle, const string& artistName, const string& releaseYear, const string& popularity) const
+void RedBlackTree::insert(const string& songTitle, const string& artistName, const string& releaseYear, const string& popularity)
 {
     if (_root->_data == nullptr) {
         _root->_data = new Data(songTitle, artistName, releaseYear, popularity);

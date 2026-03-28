@@ -26,10 +26,10 @@ struct RBTreeNode {
 //class definition for RedBlackTree
 class RedBlackTree {
     RBTreeNode* _root;
-    void deleteNode(const RBTreeNode* node);
+    void deleteNode(RBTreeNode* node);
 public:
     RedBlackTree();
     ~RedBlackTree();
-    void insert(const string& songTitle, const string& artistName, const string& releaseYear, const string& popularity) const;
+    void insert(const string& songTitle, const string& artistName, const string& releaseYear, const string& popularity);
     Data* search(const string& songTitle) const;
 };
