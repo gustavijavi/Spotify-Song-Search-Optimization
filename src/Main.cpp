@@ -17,7 +17,7 @@ int main(){
     TrieTree trieTree;
 
     // open csv file
-    std::ifstream file("/resources/song_data/cleaned_data.csv");
+    std::ifstream file("resources/song_data/cleaned_data.csv");
 
     // intitialize string for the line to be parsed
     std::string line;
